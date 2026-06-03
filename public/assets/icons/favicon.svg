@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Trail Gear Journal">
+  <rect width="64" height="64" rx="8" fill="#203d2a"/>
+  <path d="M12 46 28 16l7 14 5-8 12 24H12Z" fill="#f7f1e6"/>
+  <path d="M27 46 35 30l8 16H27Z" fill="#a66c43"/>
+</svg>
