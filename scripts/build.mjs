@@ -77,7 +77,7 @@ function header(pathname) {
   return `<header class="site-header">
   <div class="nav-shell">
     <a class="brand" href="/" aria-label="${esc(site.name)} home">
-      <span class="brand-mark">TG</span>
+      <img class="brand-mark" src="/assets/icons/favicon.svg" alt="" width="42" height="42">
       <span class="brand-name">${esc(site.name)}</span>
     </a>
     <nav class="nav-links" aria-label="Main navigation">${links}</nav>
