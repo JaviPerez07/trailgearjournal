@@ -186,17 +186,6 @@ function itemListSchema(article) {
   };
 }
 
-function reviewSchemas(article) {
-  if (article.type !== "comparison") return [];
-  return article.products.map((name) => ({
-    "@context": "https://schema.org",
-    "@type": "Review",
-    itemReviewed: { "@type": "Product", name },
-    author: { "@type": "Organization", name: "Editorial Team" },
-    reviewBody: `${article.title} evaluates ${name} qualitatively for fit, tradeoffs, and camping use cases without assigning a score.`
-  }));
-}
-
 function homePage() {
   const [lead, side, ...rest] = articles;
   const body = `<section class="hero">
@@ -372,7 +361,7 @@ function articlePage(article) {
         { name: article.title, url: `/${article.slug}` }
       ]),
       faqSchema(article.faqs),
-      ...(article.type === "comparison" ? [itemListSchema(article), ...reviewSchemas(article)] : [])
+      ...(article.type === "comparison" ? [itemListSchema(article)] : [])
     ]
   });
 }
