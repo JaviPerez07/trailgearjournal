@@ -12,6 +12,9 @@ const failures = [];
 const fail = (message) => failures.push(message);
 const read = (file) => readFile(path.join(dist, file), "utf8");
 
+// Match build.mjs: internal URLs are emitted in trailing-slash form (CF canonical).
+const trail = (pathname) => (pathname === "/" || pathname.endsWith("/") ? pathname : `${pathname}/`);
+
 async function walk(dir) {
   const entries = await readdir(dir);
   const files = [];
@@ -46,7 +49,7 @@ async function verify() {
     const route = `/${article.slug}`;
     const html = await read(`${article.slug}/index.html`);
     if (words(html) < 800) fail(`${article.slug} is below 800 words of unique content.`);
-    if (!html.includes(`rel="canonical" href="${site.domain}${route}"`)) fail(`${article.slug} canonical is missing or wrong.`);
+    if (!html.includes(`rel="canonical" href="${site.domain}${trail(route)}"`)) fail(`${article.slug} canonical is missing or wrong.`);
     if (!html.includes("By Editorial Team")) fail(`${article.slug} missing Editorial Team byline.`);
     if (html.match(/Dr\.|PhD|M\.D\.|engineer author|certified guide/gi)) fail(`${article.slug} may contain invented credential language.`);
     const affiliates = (article.affiliateProducts || [])
@@ -71,10 +74,10 @@ async function verify() {
     const file = `${tool.path.replace(/^\//, "")}/index.html`;
     const html = await read(file);
     if (words(html) < 800) fail(`${tool.slug} is below 800 words of unique content.`);
-    if (!html.includes(`rel="canonical" href="${site.domain}${tool.path}"`)) fail(`${tool.slug} canonical is missing or wrong.`);
+    if (!html.includes(`rel="canonical" href="${site.domain}${trail(tool.path)}"`)) fail(`${tool.slug} canonical is missing or wrong.`);
     if (html.includes(".html")) fail(`${tool.slug} contains .html in rendered markup.`);
     if (!html.includes("Trail Gear Journal Editorial Team")) fail(`${tool.slug} missing calculator byline.`);
-    if (!html.includes('href="/how-we-test"')) fail(`${tool.slug} missing How we test link.`);
+    if (!html.includes('href="/how-we-test/"')) fail(`${tool.slug} missing How we test link.`);
     if (!html.includes("pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")) fail(`${tool.slug} missing AdSense head script.`);
     if (!html.includes("<ins class=\"adsbygoogle ad-slot\"")) fail(`${tool.slug} missing in-article ad slot.`);
     if (!html.includes('"@type":"SoftwareApplication"')) fail(`${tool.slug} missing SoftwareApplication schema.`);
@@ -106,10 +109,10 @@ async function verify() {
   if (!home.includes("Camping Calculators")) fail("Home missing Camping Calculators section.");
   if (!toolsHubHtml.includes(toolsHub.title)) fail("Tools hub missing title.");
   for (const tool of tools) {
-    if (!sitemap.includes(`${site.domain}${tool.path}`)) fail(`Sitemap missing ${tool.path}.`);
-    if (!home.includes(`href="${tool.path}"`)) fail(`Home missing card link to ${tool.path}.`);
-    if (!toolsHubHtml.includes(`href="${tool.path}"`)) fail(`Tools hub missing card link to ${tool.path}.`);
-    if (!home.includes(`href="${tool.path}"`)) fail(`Nav on home missing ${tool.path}.`);
+    if (!sitemap.includes(`${site.domain}${trail(tool.path)}`)) fail(`Sitemap missing ${tool.path}.`);
+    if (!home.includes(`href="${trail(tool.path)}"`)) fail(`Home missing card link to ${tool.path}.`);
+    if (!toolsHubHtml.includes(`href="${trail(tool.path)}"`)) fail(`Tools hub missing card link to ${tool.path}.`);
+    if (!home.includes(`href="${trail(tool.path)}"`)) fail(`Nav on home missing ${tool.path}.`);
     if (!home.includes(tool.title)) fail(`Home missing ${tool.title}.`);
   }
 
@@ -124,7 +127,8 @@ async function verify() {
     for (const href of [...html.matchAll(/href="(\/[^"#?]+)"/g)].map((match) => match[1])) {
       if (href.startsWith("/assets/")) continue;
       if (href.match(/\.(css|js|txt|xml|svg|webp)$/)) continue;
-      if (!paths.has(href) && href !== "/") fail(`${route} links to missing route ${href}.`);
+      const norm = href === "/" ? "/" : href.replace(/\/$/, "");
+      if (!paths.has(norm) && norm !== "/") fail(`${route} links to missing route ${href}.`);
     }
   }
 

@@ -45,46 +45,70 @@ export const articles = [
   },
   {
     slug: "best-cold-weather-sleeping-bags",
-    title: "Best Sleeping Bags for Cold Weather Camping",
+    title: "Best Cold-Weather Sleeping Bags for 2026: Compared Picks and How to Choose",
     category: "Buying Guides",
     categorySlug: "buying-guides",
     image: "/assets/images/cold-weather-sleeping-bag.webp",
     alt: "A cold weather sleeping bag inside a canvas tent with frost outside",
-    dek: "How to choose a cold-weather sleeping bag for car camping and shoulder-season trips without getting fooled by optimistic temperature labels.",
+    dek: "We compared the published temperature ratings, weights, fill, and current pricing of five popular cold-weather sleeping bags, plus how to read the ratings and build a sleep system that actually keeps you warm.",
     type: "guide",
     date: "2026-06-02",
+    updated: "2026-06-14",
     products: [
-      "NEMO Disco 15",
-      "Marmot Trestles Elite Eco 20",
-      "Kelty Cosmic Down 20",
       "REI Co-op Magma 15",
+      "NEMO Disco 15",
+      "Kelty Cosmic Down 20",
+      "Marmot Trestles Elite Eco 20",
       "Big Agnes Lost Dog 15"
     ],
-    affiliateProducts: [
-      "NEMO Disco 15 Sleeping Bag",
-      "Marmot Trestles Elite Eco 20 Sleeping Bag",
-      "Kelty Cosmic Down 20 Sleeping Bag",
-      "REI Co-op Magma 15 Sleeping Bag",
-      "Big Agnes Lost Dog 15 Sleeping Bag"
-    ],
+    specTable: {
+      title: "Cold-Weather Sleeping Bags Compared",
+      headers: ["Model", "Insulation & shape", "Rated to", "EN/ISO comfort / limit", "Weight (reg)", "MSRP*"],
+      rows: [
+        ["REI Co-op Magma 15", "850-fill down, mummy", "15°F", "21°F / 9°F", "~2 lb 4 oz", "~$399"],
+        ["NEMO Disco 15", "650-fill hydrophobic down, spoon", "15°F", "~25°F / ~14°F", "2 lb 11 oz", "~$330"],
+        ["Kelty Cosmic Down 20", "550-fill down, mummy", "20°F", "31°F / 21°F", "2 lb 7 oz", "~$190"],
+        ["Marmot Trestles Elite Eco 20", "Synthetic, mummy", "20°F", "~32°F / ~22°F", "~2 lb 9 oz", "~$190"],
+        ["Big Agnes Lost Dog 15", "Synthetic (FireLine ECO), rectangular", "15°F", "Not EN/ISO rated", "3 lb 3 oz", "~$200"]
+      ],
+      note: "Manufacturer-published ratings (EN/ISO 23537 comfort/limit where listed). Temperature ratings are planning tools, not guarantees; real warmth depends on your sleeping pad, clothing, and physiology. Weights and prices vary by size and retailer — confirm current pricing on the linked product pages before buying."
+    },
     faqs: [
-      ["Is a 20 degree sleeping bag warm enough for freezing weather?", "Often, but not always. Many sleepers need a 10 to 15 degree comfort buffer, especially if they sleep cold or use an underinsulated pad."],
-      ["Is down or synthetic better for cold camping?", "Down packs smaller and can be very warm for its weight. Synthetic insulation handles damp conditions better and usually costs less."],
-      ["Does the sleeping pad matter as much as the bag?", "Yes. A warm bag on a low-R-value pad can still feel cold because the ground steals heat through compression."]
+      ["What temperature sleeping bag do I need for winter camping?", "For winter camping at or below freezing, plan around a bag rated colder than your expected overnight low, because most ratings describe a lower limit rather than true comfort. A 15°F bag paired with a high R-value pad and dry base layers is a common starting point for cold three-season and mild winter use; deep winter and high-altitude trips usually call for a 0°F or colder bag."],
+      ["How cold can you use a 15-degree sleeping bag?", "A 15°F rating is typically a lower-limit figure, meaning a warm sleeper may get through a night near 15°F but not necessarily comfortably. Many people are most comfortable roughly 10 to 15 degrees above the rated number, so a 15°F bag is often a comfortable choice for nights in the high 20s to low 30s when paired with a warm pad."],
+      ["Are down or synthetic sleeping bags better for cold weather?", "Down offers the best warmth-to-weight and packs smaller, which is why high-fill-power down bags dominate the lightweight end of this list. Synthetic insulation is bulkier and heavier for the same warmth but keeps more of its loft when damp and usually costs less, which makes it a strong pick for wet climates, car camping, and budget setups."],
+      ["What is the warmest sleeping bag shape?", "A mummy shape is the most thermally efficient because it minimizes the dead air space your body must heat. Rectangular bags are roomier and better for side sleepers and restless campers, but they lose heat faster and need more insulation to feel as warm. Some rectangular cold-weather bags compensate with a pad sleeve and a hood to cut drafts."],
+      ["Is a 20-degree sleeping bag warm enough for freezing weather?", "Often, but not always. Many sleepers need a 10 to 15 degree comfort buffer, especially if they sleep cold, use an underinsulated pad, or face wind and damp. At a hard freeze, a 20°F bag is more reliable for warm sleepers in a tent with a good pad than for cold sleepers in marginal conditions."],
+      ["Does the sleeping pad matter as much as the bag?", "Yes. A warm bag on a low-R-value pad can still feel cold because the ground steals heat through the compressed insulation beneath you. In cold weather, pad R-value is just as important as the bag's rating, and many cold nights are fixed by adding pad warmth rather than buying a warmer bag."]
     ],
     sourceNotes: [
       "Temperature ratings vary by standard, brand, and sleeper physiology; this article treats them as planning tools rather than guarantees.",
-      "Pad insulation, dry base layers, and campsite selection can change real warmth more than a small rating difference."
+      "Pad insulation, dry base layers, and campsite selection can change real warmth more than a small rating difference.",
+      "Specs above reflect manufacturer and retailer listings at the time of writing; confirm current model names, ratings, and pricing on the product pages linked below."
+    ],
+    sourceLinks: [
+      { label: "REI Co-op Magma 15 Sleeping Bag — Men's (REI)", url: "https://www.rei.com/product/148248/rei-co-op-magma-15-sleeping-bag-mens" },
+      { label: "NEMO Disco Men's Endless Promise Down Sleeping Bag (NEMO Equipment)", url: "https://www.nemoequipment.com/products/disco-mens-endless-promise-down-sleeping-bag" },
+      { label: "Kelty Cosmic Down 20 Sleeping Bag — Men's (REI)", url: "https://www.rei.com/product/896029/kelty-cosmic-down-20-sleeping-bag-mens" },
+      { label: "Marmot Trestles Elite Eco 20 Sleeping Bag (Marmot)", url: "https://www.marmot.com/equipment/sleeping-bags/synthetic/trestles-elite-eco-20-sleeping-bag/SP_220084.html" },
+      { label: "Big Agnes Lost Dog Sleeping Bag Series (Big Agnes)", url: "https://www.bigagnes.com/products/lost-dog-0" }
     ],
     sections: [
-      ["The Short Version", "Cold-weather sleeping bags are easy to overbuy and even easier to misunderstand. The number in a product name is not always the temperature at which an average person sleeps comfortably. It may be a lower-limit rating, a marketing label, or a simplified version of more detailed lab testing. For US campers who sleep in the Rockies, Appalachians, desert shoulder seasons, or northern state parks, a bag in the 15 to 20 degree range is often the practical starting point, but the pad and sleep clothing matter just as much."],
-      ["Comfort Ratings vs Survival Ratings", "A sleeping bag temperature number should be read with caution. A lower-limit rating can mean a warm sleeper may make it through the night in a curled position, not that every camper will feel cozy. Women, side sleepers, tired hikers, and people who naturally run cold often need more insulation. If overnight lows are expected around freezing, many campers are more comfortable with a bag rated below freezing and a sleeping pad with meaningful R-value. The safer buying move is to plan around comfort, not bragging rights."],
-      ["Best Shape for Cold Camping", "Mummy bags are more thermally efficient because they reduce empty air space. Semi-rectangular bags are roomier and easier for side sleepers, but they usually require more insulation to feel equally warm. Quilts can work well for experienced backpackers, yet many car campers prefer the simplicity of a full sleeping bag with a hood. If your trips involve family camping, overlanding, or truck-bed platforms, comfort may matter more than shaving ounces. If your trips involve hiking miles into camp, packed size and weight move higher on the list."],
-      ["Down vs Synthetic", "Down insulation wins when packability, long-term loft, and warmth-to-weight are priorities. It also costs more and needs care around moisture. Synthetic insulation is bulkier for the same warmth, but it can be a smart choice for damp regions, kids, loaner gear, and budget-minded campers. The best answer depends on how you actually travel. A down bag that stays dry in a waterproof stuff sack is excellent for backpacking. A synthetic bag that gets tossed into the back of an SUV by tired campers can be a very practical car-camping tool."],
-      ["Pad Pairing", "A cold-weather bag is only half the sleep system. When insulation under your body compresses, the pad becomes the thermal barrier. In cold conditions, look for a pad with an R-value suitable for shoulder-season or winter use. Foam pads can be layered under inflatable pads for extra warmth and puncture backup. Car campers can use thicker self-inflating pads, while backpackers need to balance warmth with weight. If you have ever woken up cold from below while the top of the bag felt fine, the pad was probably the weak link."],
-      ["Fit and Draft Control", "Fit matters because extra space must be warmed by your body. A bag that is too tight can compress insulation and feel restrictive; a bag that is too roomy can feel drafty. Look for a hood that cinches comfortably, a draft collar or tube along the zipper, and a zipper that can vent without opening the whole bag. Side sleepers should pay attention to shoulder and knee room. Cold weather punishes small annoyances because you notice every gap at 3 a.m."],
-      ["Care and Storage", "Never store a sleeping bag compressed for long periods. Use the large storage sack or hang it in a dry closet. Air it after trips, spot clean when possible, and wash only according to manufacturer instructions. Down bags need careful drying with low heat and patience so the clusters fully re-loft. Synthetic bags are more forgiving but still last longer with gentle handling. A bag that keeps its loft is warmer, and loft is the whole game."],
-      ["Bottom Line", "For cold-weather camping, buy a sleep system rather than a number. Match the bag to realistic overnight lows, pair it with a warm pad, keep moisture out, and choose a shape that lets you actually sleep. A slightly heavier setup that gives you eight good hours is usually better than a minimalist setup that looks impressive in a spreadsheet and feels miserable before dawn."]
+      ["The Short Version", "If you want the most warmth for the least weight, a high-fill-power down bag like the REI Co-op Magma 15 is the pick; if you camp in damp conditions or want to spend less, a synthetic bag like the Marmot Trestles Elite Eco 20 makes more sense. The number in a sleeping bag's name is usually a lower-limit rating, not the temperature at which an average person sleeps comfortably, so most campers should choose a bag rated a little colder than their expected overnight low. For US campers in the Rockies, Appalachians, desert shoulder seasons, and northern state parks, a 15°F to 20°F bag on a warm pad is a practical cold-weather starting point. The five bags below cover down and synthetic, mummy and rectangular, and budget to premium."],
+      ["Best Warmth-to-Weight: REI Co-op Magma 15", "The Magma 15 is the warmth-to-weight standout here. REI lists it with 850-fill-power water-resistant down, a 15°F rating, EN/ISO comfort and lower-limit figures of roughly 21°F and 9°F, and a regular weight around 2 lb 4 oz, at an MSRP near $399. That combination of high fill power and low weight is why down mummy bags like this dominate the lightweight end of cold-weather camping. It suits backpackers and weight-conscious campers who keep their gear dry; the tradeoff is price and the usual care that down requires around moisture."],
+      ["Best for Side Sleepers: NEMO Disco 15", "NEMO's Disco uses a Classic Spoon shape with extra room at the elbows and knees, which is why owner reviews repeatedly highlight it for side and restless sleepers. NEMO lists 650-fill-power hydrophobic, RDS-certified down, a 15°F rating, and a regular weight around 2 lb 11 oz, with chest Thermo Gill vents for temperature control, at an MSRP in the low-$300s. It is heavier and lower in fill power than the Magma, but the roomier cut and venting make it a comfortable car-camping and shoulder-season down bag for people who do not sleep flat on their back."],
+      ["Best Value Down Bag: Kelty Cosmic Down 20", "The Kelty Cosmic Down 20 is the long-running value pick in down. Kelty lists 550-fill-power down, a 20°F rating with EN comfort and lower-limit figures near 31°F and 21°F, and a regular weight around 2 lb 7 oz, often around $190. The lower fill power means it is bulkier than premium bags, but for campers who want real down warmth without a premium price, it is one of the most recommended budget down bags available and a sensible choice for cold three-season nights."],
+      ["Best Synthetic Mummy for Damp Cold: Marmot Trestles Elite Eco 20", "When conditions are wet, synthetic insulation holds more of its warmth than down, and the Marmot Trestles Elite Eco 20 is a popular synthetic mummy. Marmot lists HL-ElixR Eco synthetic insulation made from recycled, PFC-free materials, a 20°F rating with EN comfort and lower-limit figures near 32°F and 22°F, a second fold-down zipper for ventilation, and a regular weight in the 2 lb 9 oz range, typically near $190. It is the practical choice for humid regions, loaner gear, and campers who do not want to baby a down bag."],
+      ["Best Rectangular Cold-Weather Bag: Big Agnes Lost Dog 15", "Most cold-weather bags are mummy-shaped, so campers who want a roomier rectangular bag have fewer warm options. The Big Agnes Lost Dog 15 is a rectangular system bag with FireLine ECO synthetic insulation (made from recycled materials), a 15°F rating, an integrated Flex Pad Sleeve that locks the bag to your pad, and a regular weight around 3 lb 3 oz, typically near $200. The rectangular cut and pad sleeve trade some thermal efficiency and weight for comfort and the elimination of cold gaps between bag and pad, which is a sensible compromise for car campers who hate feeling restricted."],
+      ["What About Extreme Cold Below 0°F?", "None of the five bags above are extreme-cold or expedition bags. They are rated to 15°F or 20°F, which covers most cold three-season and mild winter camping, not deep-winter or high-altitude conditions. For sustained temperatures below 0°F, look for a bag specifically rated to 0°F, -20°F, or colder, ideally with EN/ISO 23537 comfort figures rather than a single marketing number, plus a full draft collar, an insulated hood, and a pad with a high winter R-value. Stretching a 15°F bag to -20°F with a liner is risky, so treat sub-zero trips as a different category and confirm a true expedition rating before you rely on it."],
+      ["Lightweight Cold-Weather Options", "If packed weight is your priority, fill power does most of the work: higher fill power means more warmth per ounce. Among these picks, the 850-fill REI Magma 15 is the lightest for its warmth at roughly 2 lb 4 oz, followed by the 550-fill Kelty Cosmic Down 20 at about 2 lb 7 oz. Synthetic bags such as the Marmot and the Big Agnes weigh more for the same warmth, which is the expected tradeoff for their moisture resistance and lower price. Backpackers heading into the cold generally favor high-fill-power down kept dry in a waterproof stuff sack."],
+      ["How to Read a Temperature Rating", "A sleeping bag temperature number should be read with caution. Many bags carry EN/ISO 23537 figures: a comfort rating (aimed at a standard cold sleeper) and a lower-limit rating (aimed at a standard warm sleeper). A single marketed number is often close to the lower limit, which a warm sleeper may survive in a curled position rather than enjoy. Women, side sleepers, tired hikers, and people who naturally run cold typically need more insulation. If overnight lows are expected around freezing, plan around the comfort rating, not the headline number."],
+      ["Down vs Synthetic for Cold Weather", "Down insulation wins when packability, long-term loft, and warmth-to-weight are priorities. It costs more and needs care around moisture. Synthetic insulation is bulkier for the same warmth, but it keeps more of its loft when damp and is a smart choice for wet regions, kids, loaner gear, and budget-minded campers. A down bag kept dry in a waterproof stuff sack is excellent for backpacking; a synthetic bag that gets tossed into the back of an SUV by tired campers is a very practical car-camping tool."],
+      ["Mummy vs Rectangular vs Quilt", "Mummy bags are the most thermally efficient because they reduce empty air space and add a hood. Rectangular bags are roomier and friendlier to side sleepers, but they lose heat faster and need more insulation, which is why warm rectangular options like the Lost Dog often add a pad sleeve to cut drafts. Quilts can work well for experienced backpackers chasing low weight, but many car campers prefer the simplicity of a full hooded bag. Match the shape to how you actually sleep and travel, not to a spec sheet."],
+      ["Don't Forget the Sleeping Pad", "A cold-weather bag is only half the sleep system. When the insulation under your body compresses, the pad becomes the thermal barrier, so pad R-value matters as much as the bag's rating in the cold. Look for a pad with an R-value suited to shoulder-season or winter use, and consider layering a foam pad under an inflatable one for extra warmth and puncture backup. If you have ever woken up cold from below while the top of the bag felt fine, the pad was the weak link."],
+      ["Fit, Hood, and Draft Control", "Fit matters because extra space must be warmed by your body. A bag that is too tight compresses insulation and feels restrictive; one that is too roomy feels drafty. Look for a hood that cinches comfortably, a draft collar or tube along the zipper, and a zipper that can vent without opening the whole bag. Side sleepers should check shoulder and knee room. Cold weather punishes small annoyances because you notice every gap at 3 a.m."],
+      ["Care and Storage", "Never store a sleeping bag compressed for long periods. Use the large storage sack or hang it in a dry closet, air it after trips, spot clean when possible, and wash only according to manufacturer instructions. Down bags need careful drying with low heat and patience so the clusters fully re-loft; synthetic bags are more forgiving but still last longer with gentle handling. A bag that keeps its loft is warmer, and loft is the whole game."],
+      ["Bottom Line", "For cold-weather camping, buy a sleep system rather than a number. Match the bag to realistic overnight lows, pair it with a warm pad, keep moisture out, and choose a shape that lets you actually sleep. If you want the lightest warm setup, the REI Magma 15 leads; for value down, the Kelty Cosmic Down 20; for damp cold, the Marmot Trestles Elite Eco 20; for a roomy rectangular bag, the Big Agnes Lost Dog 15; and for side sleepers, the NEMO Disco 15. A slightly heavier setup that gives you eight good hours beats a minimalist setup that looks impressive in a spreadsheet and feels miserable before dawn."]
     ]
   },
   {
@@ -141,6 +165,7 @@ export const articles = [
     dek: "A practical two-burner stove comparison for car campers choosing between power, price, simmer control, and packed convenience.",
     type: "comparison",
     date: "2026-06-02",
+    updated: "2026-06-14",
     products: [
       "Camp Chef Everest 2X",
       "Coleman Cascade 222"
@@ -152,7 +177,7 @@ export const articles = [
     comparisonRows: [
       ["Heat output", "40,000 total BTU; two 20,000 BTU burners", "22,000 total BTU; two burners"],
       ["Listed weight", "12 lb", "13.05 lb"],
-      ["Listed dimensions", "24 x 13 x 6 in", "22 x 13.2 x 3.7 in"],
+      ["Listed dimensions", "23.5 x 13.5 x 4 in", "22 x 13.2 x 3.7 in"],
       ["Best for", "Big meals, windier sites, fast boiling", "Everyday campground meals and balanced packed size"]
     ],
     faqs: [
@@ -161,13 +186,17 @@ export const articles = [
       ["Do both use propane?", "Yes. Both are designed around propane camp-stove use, with one-pound cylinders common for portable setups."]
     ],
     sourceNotes: [
-      "Camp Chef manufacturer specs list the Everest 2X at 40,000 total BTU, 12 lb, 24 in wide, 6 in high, and 13 in deep.",
-      "Coleman manufacturer specs list the Cascade 222 at 22,000 BTU, 13.05 lb, and 22 x 13.2 x 3.7 in."
+      "Camp Chef manufacturer specs list the Everest 2X at 40,000 total BTU (two 20,000 BTU burners), 12 lb system weight, and overall dimensions of 23.5 x 13.5 x 4 in.",
+      "Coleman manufacturer specs list the Cascade 222 at 22,000 total BTU, with two adjustable burners and built-in wind guards."
+    ],
+    sourceLinks: [
+      { label: "Camp Chef Everest 2X Camping Stove (Camp Chef)", url: "https://www.campchef.com/products/everest-2x" },
+      { label: "Coleman Cascade 222 2-Burner Camping Stove (Coleman)", url: "https://www.coleman.com/grills-stoves/camping-stoves/cascade-222-2-burner-camping-stove/SAP_2157317.html" }
     ],
     sections: [
       ["The Decision", "Choose the Camp Chef Everest 2X if your camp kitchen regularly involves big pots, cast iron, group breakfasts, or wind-prone sites where burner strength matters. Choose the Coleman Cascade 222 if you want a capable two-burner stove that is easier to justify for ordinary weekend campground cooking. Both are legitimate car-camping stoves. The difference is not whether one works and the other does not. It is whether you want the headroom of a high-output stove or the balance of a mainstream propane workhorse."],
       ["Power and Heat Control", "Camp Chef lists the Everest 2X at two 20,000 BTU burners for 40,000 total BTU. Coleman lists the Cascade 222 at 22,000 total BTU. That gap is meaningful when boiling large pots of water, heating heavy pans, or cooking in breezy conditions. High output is not automatically better, though. Simmer control, flame spread, cookware, and wind shielding all affect the meal. If you cook delicate sauces at camp, knob feel and low-flame stability matter. If you mostly boil, sear, and run breakfast for several people, the Everest has obvious appeal."],
-      ["Size and Packability", "The Everest 2X is listed at 24 inches wide, 13 inches deep, and 6 inches high. The Cascade 222 is listed at 22 by 13.2 by 3.7 inches. In practical terms, Coleman’s stove is flatter and a little easier to slide into some storage bins, while the Everest offers more power in a bulkier body. Weight is closer than many buyers expect: Camp Chef lists 12 pounds, while Coleman lists 13.05 pounds. Packed shape may matter more than the scale if you use a tight trunk, drawer system, or overlanding kitchen box."],
+      ["Size and Packability", "The Everest 2X is listed at 23.5 inches wide, 13.5 inches deep, and 4 inches high. The Cascade 222 is listed at 22 by 13.2 by 3.7 inches. In practical terms, Coleman’s stove is flatter and a little easier to slide into some storage bins, while the Everest offers more power in a bulkier body. Weight is closer than many buyers expect: Camp Chef lists 12 pounds, while Coleman lists 13.05 pounds. Packed shape may matter more than the scale if you use a tight trunk, drawer system, or overlanding kitchen box."],
       ["Cooking Experience", "The Everest 2X feels aimed at campers who cook like they mean it. It is the stove for chili, griddles, boiling pasta, and morning meals where one burner is not enough. The Cascade 222 fits a more familiar pattern: two adjustable propane burners, wind guards, matchless ignition, and enough pan room for common campground meals. If your camping menu is simple, the Coleman may feel more than adequate. If cooking is part of the trip’s identity, the Camp Chef gives you more room to grow."],
       ["Fuel Use and Real-World Tradeoffs", "More burner output can mean faster cooking, but it can also mean faster fuel consumption when run wide open. Frequent campers should consider a larger propane tank and hose setup either way. For casual weekend use, one-pound cylinders remain convenient, but they are not the most efficient long-term choice. Think through how often you cook, how many people you feed, and whether you need full-power burners or simply a dependable flame."],
       ["Who Should Buy the Everest 2X", "Buy the Everest 2X if you camp with groups, cook in wind, use cast iron, or hate waiting on big pots. It is also a strong fit for overlanders who build camp kitchens around real cooking rather than snack prep. The main caution is that its power and size may be excessive for minimal campers. Paying for burner headroom makes sense only if you use it."],
@@ -185,6 +214,7 @@ export const articles = [
     dek: "Fast-boil integrated system or tiny canister stove? Here is how to choose between two common backpacking cooking styles.",
     type: "comparison",
     date: "2026-06-02",
+    updated: "2026-06-14",
     products: [
       "Jetboil Flash",
       "MSR PocketRocket 2"
@@ -207,6 +237,10 @@ export const articles = [
     sourceNotes: [
       "Jetboil lists Flash boil time at 120 seconds per 0.5 liter, averaged over the life of a JetPower can.",
       "REI lists the MSR PocketRocket 2 at 2.6 ounces and an average 1 liter boil time of 3 minutes 30 seconds."
+    ],
+    sourceLinks: [
+      { label: "Jetboil Flash Fast Boil Cooking System (Jetboil)", url: "https://www.jetboil.com/Products/Flash-Cooking-System-Carbon/" },
+      { label: "MSR PocketRocket 2 Canister Backpacking Stove (MSR)", url: "https://www.msrgear.com/stoves/canister-stoves/pocketrocket-2-stove/09884.html" }
     ],
     sections: [
       ["The Decision", "Choose the Jetboil Flash if your backcountry cooking is mostly hot water: coffee, instant oatmeal, ramen, and freeze-dried meals. Choose the MSR PocketRocket 2 if you want a tiny stove that works with the pot you choose and can handle more varied cooking. These are not just two stoves with different weights. They represent two cooking philosophies. Jetboil integrates burner, pot, heat exchanger, and cozy. MSR gives you a compact burner and lets the rest of the kit be modular."],

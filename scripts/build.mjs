@@ -31,13 +31,49 @@ const wordCount = (html) =>
     .split(/\s+/)
     .filter(Boolean).length;
 
-const canonical = (pathname) => `${site.domain}${pathname === "/" ? "" : pathname}`;
+// Cloudflare Pages serves directory URLs with a trailing slash (it 308-redirects
+// the no-slash form). Align every internal URL we emit to that canonical form so
+// canonical/og/sitemap/internal links match what CF actually serves at 200 — no
+// canonical→redirect mismatch and no 308 hops on internal navigation.
+const trail = (pathname) => (pathname === "/" || pathname.endsWith("/") ? pathname : `${pathname}/`);
+
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+// Format an ISO date ("2026-06-14") without Date() to avoid timezone drift.
+const prettyDate = (iso) => {
+  const [y, m, d] = iso.split("-").map(Number);
+  return `${MONTHS[m - 1]} ${d}, ${y}`;
+};
+// Real lastmod per URL: an article's own date, a tool's updatedISO, else the site baseline.
+const SITE_BASELINE_DATE = "2026-06-02";
+const lastmodFor = (url) => {
+  const a = articles.find((x) => `/${x.slug}` === url);
+  if (a) return a.updated || a.date;
+  const t = tools.find((x) => x.path === url);
+  if (t && t.updatedISO) return t.updatedISO;
+  return SITE_BASELINE_DATE;
+};
+const canonical = (pathname) => `${site.domain}${pathname === "/" ? "/" : trail(pathname)}`;
+
+// Rewrite relative internal hrefs (href="/...") to the trailing-slash form.
+// Skips the root, already-slashed paths, anchors/queries, and file paths
+// (last segment contains a dot, e.g. /styles.css, /assets/icons/favicon.svg).
+function addTrailingSlashes(html) {
+  return html.replace(/href="(\/[^"]*)"/g, (full, p) => {
+    if (p === "/" || p.startsWith("//")) return full;
+    const cut = p.search(/[#?]/);
+    const pathPart = cut === -1 ? p : p.slice(0, cut);
+    const rest = cut === -1 ? "" : p.slice(cut);
+    if (pathPart.endsWith("/")) return full;
+    if (pathPart.split("/").pop().includes(".")) return full;
+    return `href="${pathPart}/${rest}"`;
+  });
+}
 
 function pageShell({ title, description, pathname, body, image, schema = [], noindex = false }) {
   const url = canonical(pathname);
   const imageUrl = image ? `${site.domain}${image}` : `${site.domain}/assets/images/home-hero-camp-kitchen.webp`;
   const jsonLd = schema.map((item) => `<script type="application/ld+json">${JSON.stringify(item)}</script>`).join("\n");
-  return `<!doctype html>
+  return addTrailingSlashes(`<!doctype html>
 <html lang="en-US">
 <head>
   <meta charset="utf-8">
@@ -67,7 +103,7 @@ function pageShell({ title, description, pathname, body, image, schema = [], noi
   <main id="main">${body}</main>
   ${footer()}
 </body>
-</html>`;
+</html>`);
 }
 
 function header(pathname) {
@@ -120,7 +156,7 @@ function breadcrumbSchema(items) {
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: `${site.domain}${item.url === "/" ? "" : item.url}`
+      item: canonical(item.url)
     }))
   };
 }
@@ -133,10 +169,10 @@ function articleSchema(article) {
     description: article.dek,
     image: `${site.domain}${article.image}`,
     datePublished: article.date,
-    dateModified: article.date,
+    dateModified: article.updated || article.date,
     editor: { "@type": "Organization", name: "Editorial Team" },
     publisher: { "@type": "Organization", name: site.name },
-    mainEntityOfPage: `${site.domain}/${article.slug}`
+    mainEntityOfPage: canonical(`/${article.slug}`)
   };
 }
 
@@ -159,7 +195,7 @@ function softwareApplicationSchema(tool) {
     name: tool.title,
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
-    url: `${site.domain}${tool.path}`,
+    url: canonical(tool.path),
     description: tool.dek,
     offers: {
       "@type": "Offer",
@@ -303,7 +339,19 @@ function articlePage(article) {
   <tbody>${article.comparisonRows.map((row) => `<tr><td>${esc(row[0])}</td><td>${esc(row[1])}</td><td>${esc(row[2])}</td></tr>`).join("")}</tbody>
 </table>`
     : "";
-  const sources = `<h2 id="source-notes">Source Notes</h2><ul>${article.sourceNotes.map((note) => `<li>${esc(note)}</li>`).join("")}</ul>`;
+  const specTable = article.specTable
+    ? `<h2 id="spec-comparison">${esc(article.specTable.title || "Specs Compared")}</h2>
+<div class="table-scroll"><table class="comparison-table">
+  <thead><tr>${article.specTable.headers.map((h) => `<th>${esc(h)}</th>`).join("")}</tr></thead>
+  <tbody>${article.specTable.rows.map((row) => `<tr>${row.map((cell) => `<td>${esc(cell)}</td>`).join("")}</tr>`).join("")}</tbody>
+</table></div>${article.specTable.note ? `<p class="table-note">${esc(article.specTable.note)}</p>` : ""}`
+    : "";
+  const sourceLinksHtml = article.sourceLinks && article.sourceLinks.length
+    ? `<p><strong>Sources</strong></p><ul>${article.sourceLinks
+        .map((s) => `<li><a href="${esc(s.url)}" rel="nofollow noopener" target="_blank">${esc(s.label)}</a></li>`)
+        .join("")}</ul>`
+    : "";
+  const sources = `<h2 id="source-notes">Source Notes</h2><ul>${article.sourceNotes.map((note) => `<li>${esc(note)}</li>`).join("")}</ul>${sourceLinksHtml}`;
   const related = articles
     .filter((item) => item.slug !== article.slug)
     .slice(0, 3)
@@ -315,7 +363,7 @@ function articlePage(article) {
   const body = `<section class="article-hero">
   <div class="article-shell">
     <div>
-      <p class="article-meta">${esc(article.category)} · Updated June 2, 2026 · By Editorial Team</p>
+      <p class="article-meta">${esc(article.category)} · Updated ${esc(prettyDate(article.updated || article.date))} · By Editorial Team</p>
       <h1>${esc(article.title)}</h1>
       <p>${esc(article.dek)}</p>
     </div>
@@ -327,7 +375,8 @@ function articlePage(article) {
     <article class="article-body">
       ${ftcDisclosure}
       ${comparison}
-      <p>Every recommendation here follows the ${esc(site.name)} <a href="/how-we-test">testing and evaluation process</a>.</p>
+      <p>Every recommendation here follows the ${esc(site.name)} <a href="/how-we-test">research and evaluation process</a>.</p>
+      ${specTable}
       ${bodySections}
       ${sources}
       <h2 id="faq">FAQ</h2>
@@ -466,6 +515,7 @@ function toolPage(tool) {
     </aside>
     <article class="article-body" id="calculator-guide">
       <aside class="notice"><strong>Planning disclaimer:</strong> Calculator results are estimates for outdoor trip planning. They are not professional advice, medical guidance, fire-safety clearance, or a substitute for current campground, public-land, weather, and manufacturer instructions.</aside>
+      ${tool.directAnswer ? `<h2 id="quick-answer">${esc(tool.directAnswer.heading)}</h2><p>${esc(tool.directAnswer.answer)}</p>` : ""}
       <h2>What This Calculator Does</h2>
       <p>${esc(tool.dek)} It is built for quick planning before you buy gear, load a vehicle, pack a backpack, or leave for a campground where small mistakes can become expensive or uncomfortable. The result should be treated as a range-aware starting point, then checked against your actual gear, local rules, weather, and group needs.</p>
       <h2>How This Calculator Works</h2>
@@ -492,6 +542,7 @@ function toolPage(tool) {
       </ul>
       <h2>FAQ</h2>
       ${tool.faqs.map(([q, a]) => `<details class="faq-box"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("")}
+      ${tool.sourceLinks && tool.sourceLinks.length ? `<h2 id="sources">Sources</h2><ul>${tool.sourceLinks.map((s) => `<li><a href="${esc(s.url)}" rel="nofollow noopener" target="_blank">${esc(s.label)}</a></li>`).join("")}</ul>` : ""}
     </article>
   </div>
 </section>
@@ -563,15 +614,17 @@ async function copyPublicAssets() {
 }
 
 function redirects() {
+  // Destinations use the trailing-slash form so legacy/.html hits 301 straight to
+  // the URL CF serves at 200 — no extra 308 hop.
   const lines = [...new Set([
     "/index.html / 301!",
-    "/gear-weight-calculator /tools/backpack-weight-calculator 301!",
-    "/gear-weight-calculator.html /tools/backpack-weight-calculator 301!",
-    ...articles.map((a) => `/${a.slug}.html /${a.slug} 301!`),
-    ...navigation.map((n) => `${n.href}.html ${n.href} 301!`),
-    ...editorialPages.map((p) => `${p.href}.html ${p.href} 301!`),
-    "/tools.html /tools 301!",
-    ...tools.map((tool) => `${tool.path}.html ${tool.path} 301!`)
+    `/gear-weight-calculator ${trail("/tools/backpack-weight-calculator")} 301!`,
+    `/gear-weight-calculator.html ${trail("/tools/backpack-weight-calculator")} 301!`,
+    ...articles.map((a) => `/${a.slug}.html ${trail(`/${a.slug}`)} 301!`),
+    ...navigation.map((n) => `${n.href}.html ${trail(n.href)} 301!`),
+    ...editorialPages.map((p) => `${p.href}.html ${trail(p.href)} 301!`),
+    `/tools.html ${trail("/tools")} 301!`,
+    ...tools.map((tool) => `${tool.path}.html ${trail(tool.path)} 301!`)
   ])];
   return lines.join("\n") + "\n";
 }
@@ -600,7 +653,7 @@ function sitemap() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls
   .filter((url) => url !== "/404")
-  .map((url) => `  <url><loc>${canonical(url)}</loc><lastmod>2026-06-02</lastmod></url>`)
+  .map((url) => `  <url><loc>${canonical(url)}</loc><lastmod>${lastmodFor(url)}</lastmod></url>`)
   .join("\n")}
 </urlset>
 `;

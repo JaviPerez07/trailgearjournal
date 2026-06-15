@@ -70,7 +70,12 @@ export const tools = [
     dek: "Estimate how many liters and gallons of water to bring or resupply for drinking, cooking, and hot-weather activity.",
     resultLabel: "Estimated Water",
     scriptId: "camp-water",
-    reviewed: "June 3, 2026",
+    reviewed: "June 14, 2026",
+    updatedISO: "2026-06-14",
+    directAnswer: {
+      heading: "How much water do you need per day camping?",
+      answer: "A common planning baseline is about 2 liters (0.5 gallon) of drinking water per person per day in mild conditions, plus roughly 0.5 to 1 liter more per person for cooking and cleanup. In heat, at altitude, or during active days the figure climbs toward 1 gallon (about 4 liters) per person per day, which is the amount the US National Park Service advises hikers to carry in hot, dry parks. Use the calculator above to combine drinking, cooking, heat, and group size into a single liters-and-gallons estimate, then add a margin if you cannot count on a working water source."
+    },
     inputs: [
       { id: "people", label: "People", type: "number", min: "1", step: "1", value: "2" },
       { id: "days", label: "Trip length in days", type: "number", min: "1", step: "0.5", value: "2" },
@@ -107,6 +112,10 @@ export const tools = [
       ["Should I include dishwashing water?", "Yes, at least as a small planning buffer. Even low-water cleanup, coffee, and oatmeal can use more than expected."],
       ["Do I need more water for desert camping?", "Usually yes. Hot, dry, exposed conditions can push needs toward 4 liters or more per person per day, before cooking."],
       ["Can I rely on campground water?", "Only after checking current campground information. Seasonal closures, repairs, freezing temperatures, or dry sites can change availability."]
+    ],
+    sourceLinks: [
+      { label: "Backpacking Preparation and Safety — Guadalupe Mountains National Park (NPS): plan at least one gallon of water per person per day", url: "https://www.nps.gov/gumo/planyourvisit/bcpreparation.htm" },
+      { label: "Hike Smart — Grand Canyon National Park (NPS): hydration and heat guidance", url: "https://www.nps.gov/grca/planyourvisit/hike-smart.htm" }
     ],
     related: ["/how-to-set-up-a-campsite", "/van-life-setup-guide-beginners", "/tools/firewood-calculator"]
   },
